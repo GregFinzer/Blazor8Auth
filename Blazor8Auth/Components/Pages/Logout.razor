@@ -1,0 +1,21 @@
+﻿@page "/logout"
+@using Blazor8Auth.Services
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    [Inject] private AuthService AuthService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthService.IsLoggedIn)
+        {
+            await AuthService.LogoutAsync();
+            NavigationManager.NavigateTo("/auth");
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/auth");
+        }
+    }
+     
+}

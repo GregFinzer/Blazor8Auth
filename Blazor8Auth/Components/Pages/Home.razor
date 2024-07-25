@@ -1,0 +1,20 @@
+﻿@page "/"
+@using Blazor8Auth.Services
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@code {
+    [Inject] private AuthService AuthService { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!AuthService.IsLoggedIn)
+        {
+            await AuthService.GetStateFromTokenAsync();
+        }
+    }
+}

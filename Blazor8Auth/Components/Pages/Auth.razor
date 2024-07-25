@@ -1,0 +1,25 @@
+﻿@page "/auth"
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+
+<h3>Authentication Status</h3>
+
+<AuthorizeView>
+    <Authorized>
+        <p>User Logged In: @context.User.Identity.Name</p>
+        <p>Role:  @context.User.Claims.First(o => o.Type == ClaimTypes.Role).Value</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>Not logged in</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <h3>Admin Dashboard</h3>
+        <p>Welcome, Admin! You have access to this because you are an administrator.</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>You do not have the necessary permissions.</p>
+    </NotAuthorized>
+</AuthorizeView>
