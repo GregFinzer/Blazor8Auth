@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-public class LoginModel
+public class SignInModel
 {
     [Required, EmailAddress]
     public string Email { get; set; }
