@@ -14,14 +14,15 @@ builder.Services.AddRazorComponents()
 //Authentication
 builder.Services.AddAuthorization();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
-    {
-        options.Cookie.Name = "auth_token";
-        options.LoginPath = "/login";
-        options.Cookie.MaxAge = TimeSpan.FromHours(24);
-        options.AccessDeniedPath = "/acessDenied";
-    });
+builder.Services.AddAuthentication();
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(options =>
+//    {
+//        options.Cookie.Name = "auth_token";
+//        options.LoginPath = "/login";
+//        options.Cookie.MaxAge = TimeSpan.FromHours(24);
+//        options.AccessDeniedPath = "/acessDenied";
+//    });
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();

@@ -1,0 +1,33 @@
+﻿@page "/login"
+
+<div class="text-center w-100 m-2 text-black-50">
+    <h2>Blazor 8 Auth</h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Please enter your login details</h5>
+        <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label for="email">User Name</label>
+                <InputText Id="email" @ref="@inputTextFocus" class="form-control" @bind-Value="loginModel.Email"  />
+                <ValidationMessage For="@(() => loginModel.Email)" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <InputText Id="password" type="@passwordType" class="form-control" @bind-Value="loginModel.Password" />
+                <ValidationMessage For="@(() => loginModel.Password)" />
+            </div>
+            <div class="form-group">
+                <input id="showPassword" type="checkbox" checked="@showPassword "@oninput="@HandlePassword" />
+                <label for="showPassword">Show Password</label>
+            </div>
+            <h6 class="warning login-error text-center" style="display: @DisplayError">@errorMessage</h6>
+            <div class="w-100 text-center">
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </div>
+        </EditForm>
+    </div>
+</div>

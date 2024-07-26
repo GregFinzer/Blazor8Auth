@@ -1,6 +1,7 @@
 ﻿@page "/auth"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
+@using Blazor8Auth.Services
 
 <h3>Authentication Status</h3>
 
@@ -23,3 +24,20 @@
         <p>You do not have the necessary permissions.</p>
     </NotAuthorized>
 </AuthorizeView>
+
+@code {
+    [Inject] private AuthService AuthService { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!AuthService.IsLoggedIn)
+        {
+            var restoredFromState = await AuthService.GetStateFromTokenAsync();
+            if (restoredFromState)
+            {
+                NavigationManager.Refresh();
+            }
+        }
+    }
+}
