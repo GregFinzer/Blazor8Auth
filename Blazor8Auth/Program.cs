@@ -3,6 +3,7 @@ using Blazor8Auth.Services;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,8 @@ builder.Services.AddCascadingAuthenticationState();
 
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
+
+builder.Services.AddRazorPages(options => { options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()); }).WithRazorPagesRoot("/Components/Pages");
 
 var app = builder.Build();
 
