@@ -24,12 +24,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/acessDenied";
     });
 
-builder.Services.AddScoped<AuthService>();
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+//builder.Services.AddScoped<AuthService>();
+//builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddCascadingAuthenticationState();
 
-builder.Services.AddBlazoredSessionStorage();
-builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
+//builder.Services.AddBlazoredSessionStorage();
+//builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
 
 builder.Services.AddRazorPages(options => { options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()); }).WithRazorPagesRoot("/Components/Pages");
 
@@ -48,7 +48,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
+
+app.MapRazorPages();
+
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+
 
 app.Run();
