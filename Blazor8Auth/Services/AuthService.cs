@@ -45,8 +45,9 @@ namespace Blazor8Auth.Services
             }
         }
 
-        public async Task GetStateFromTokenAsync()
+        public async Task<bool> GetStateFromTokenAsync()
         {
+            bool result = false;
             string authToken = await _sessionService.GetItemAsStringAsync(AuthTokenName);
 
             var identity = new ClaimsIdentity();
@@ -69,6 +70,7 @@ namespace Blazor8Auth.Services
 
                     var jwtToken = (JwtSecurityToken)validatedToken;
                     identity = new ClaimsIdentity(jwtToken.Claims, "jwt");
+                    result = true;
                 }
                 catch
                 {
@@ -79,6 +81,7 @@ namespace Blazor8Auth.Services
 
             var user = new ClaimsPrincipal(identity);
             CurrentUser = user;
+            return result;
         }
 
 

@@ -1,6 +1,7 @@
 ﻿@page "/auth"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
+@using Blazor8Auth.Services
 
 <h3>Authentication Status</h3>
 
@@ -20,6 +21,7 @@
         <p>Welcome, Admin! You have access to this because you are an administrator.</p>
     </Authorized>
     <NotAuthorized>
-        <p>You do not have the necessary permissions.</p>
+        <p>You do not have the Admin Role.</p>
     </NotAuthorized>
 </AuthorizeView>
+

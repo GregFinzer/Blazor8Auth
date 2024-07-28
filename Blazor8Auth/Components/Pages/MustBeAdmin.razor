@@ -1,0 +1,6 @@
+﻿@page "/mustBeAdmin"
+
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "Admin")]
+
+You are an Admin so you can view this page.

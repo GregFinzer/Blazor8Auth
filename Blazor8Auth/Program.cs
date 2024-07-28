@@ -3,8 +3,6 @@ using Blazor8Auth.Services;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,20 +16,17 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.Cookie.Name = "auth_token";
-        options.LoginPath = "/login";
+        options.Cookie.Name = "auth_cookie";
         options.Cookie.MaxAge = TimeSpan.FromHours(24);
-        options.AccessDeniedPath = "/acessDenied";
     });
 
-//builder.Services.AddScoped<AuthService>();
-//builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddCascadingAuthenticationState();
 
-//builder.Services.AddBlazoredSessionStorage();
-//builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
-
-builder.Services.AddRazorPages(options => { options.Conventions.ConfigureFilter(new AutoValidateAntiforgeryTokenAttribute()); }).WithRazorPagesRoot("/Components/Pages");
+builder.Services.AddScoped<AuthDataService>();
+builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
 
 var app = builder.Build();
 
@@ -48,12 +43,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-
-app.MapRazorPages();
-
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
-
-
 
 app.Run();
