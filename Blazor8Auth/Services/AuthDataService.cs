@@ -3,7 +3,10 @@ using Blazor8Auth.Entities;
 
 namespace Blazor8Auth.Services
 {
-    public class AuthDataService
+    /// <summary>
+    /// This is an example of a data service that would be used to authenticate a user.
+    /// </summary>
+    public class AuthDataService : IAuthDataService
     {
         public ServiceResponse<ClaimsPrincipal> Login(string email, string password)
         {

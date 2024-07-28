@@ -1,4 +1,5 @@
 using Blazor8Auth.Components;
+using Blazor8Auth.Components.Pages;
 using Blazor8Auth.Services;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -13,6 +14,7 @@ builder.Services.AddRazorComponents()
 //Authentication
 builder.Services.AddAuthorization();
 
+//The cookie authentication is never used, but it is required to prevent a runtime error
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -20,11 +22,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.MaxAge = TimeSpan.FromHours(24);
     });
 
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddCascadingAuthenticationState();
 
-builder.Services.AddScoped<AuthDataService>();
+builder.Services.AddScoped<IAuthDataService, AuthDataService>();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
 

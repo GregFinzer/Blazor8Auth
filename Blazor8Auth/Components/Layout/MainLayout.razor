@@ -24,7 +24,7 @@
 </div>
 
 @code {
-    [Inject] private AuthService AuthService { get; set; }
+    [Inject] private IAuthService AuthService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

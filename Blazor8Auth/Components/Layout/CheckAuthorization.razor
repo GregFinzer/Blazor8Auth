@@ -3,7 +3,7 @@
 <h1>@message</h1>
 
 @code {
-    [Inject] private AuthService AuthService { get; set; }
+    [Inject] private IAuthService AuthService { get; set; }
     [Inject] private NavigationManager NavigationManager { get; set; }
     string returnUrl;
     string message = string.Empty;

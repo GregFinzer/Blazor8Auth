@@ -8,8 +8,8 @@ namespace Blazor8Auth.Components.Pages
     public partial class Login : ComponentBase
     {
         [Inject] private NavigationManager NavigationManager { get; set; }
-        [Inject] private AuthService AuthService { get; set; }
-        [Inject] private AuthDataService AuthDataService { get; set; }
+        [Inject] private IAuthService AuthService { get; set; }
+        [Inject] private IAuthDataService AuthDataService { get; set; }
 
         protected SignInModel loginModel = new();
 

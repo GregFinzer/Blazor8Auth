@@ -2,11 +2,14 @@
 
 namespace Blazor8Auth.Services
 {
+    /// <summary>
+    /// Updates the Blazor backend authentication state when the user changes.
+    /// </summary>
     public class CustomAuthStateProvider : AuthenticationStateProvider
     {
         private AuthenticationState authenticationState;
 
-        public CustomAuthStateProvider(AuthService service)
+        public CustomAuthStateProvider(IAuthService service)
         {
             authenticationState = new AuthenticationState(service.CurrentUser);
 
