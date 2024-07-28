@@ -1,6 +1,7 @@
 ﻿@page "/mustBeLoggedIn"
-
 @using Microsoft.AspNetCore.Authorization
+
+@* You have to be logged in to view this page. *@
 @attribute [Authorize]
 
 You are authorized to view this page.

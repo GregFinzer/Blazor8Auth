@@ -1,10 +1,10 @@
 ﻿@page "/auth"
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
-@using Blazor8Auth.Services
 
 <h3>Authentication Status</h3>
 
+@* Example of using the AuthorizeView component to display different content based on the user's authentication status: *@
 <AuthorizeView>
     <Authorized>
         <p>User Logged In: @context.User.Identity.Name</p>
@@ -15,6 +15,7 @@
     </NotAuthorized>
 </AuthorizeView>
 
+@* Example of using the AuthorizeView component to display different content based on the user's role: *@
 <AuthorizeView Roles="Admin">
     <Authorized>
         <h3>Admin Dashboard</h3>

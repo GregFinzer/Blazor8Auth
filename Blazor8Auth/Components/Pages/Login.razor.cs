@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-using Blazor8Auth.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Blazor8Auth.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.WebUtilities;
@@ -30,7 +28,7 @@ namespace Blazor8Auth.Components.Pages
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-
+            //Parse the query string for the return URL, so we can go there after login
             if (String.IsNullOrEmpty(returnUrl))
             {
                 var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
@@ -40,6 +38,7 @@ namespace Blazor8Auth.Components.Pages
                 }
             }
 
+            //A hard reset was performed or the session was lost, try to restore the state and redirect back to the returnUrl
             if (firstRender && !AuthService.IsLoggedIn)
             {
                 var restoredFromState = await AuthService.GetStateFromTokenAsync();
@@ -48,6 +47,7 @@ namespace Blazor8Auth.Components.Pages
                     if (!string.IsNullOrEmpty(returnUrl))
                     {
                         NavigationManager.NavigateTo(returnUrl);
+                        returnUrl = string.Empty;
                     }
                 }
             }

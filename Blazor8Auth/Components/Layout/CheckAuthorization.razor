@@ -12,10 +12,12 @@
     {
         returnUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
 
+        //The user is logged in, but does not have the required role for a page
         if (AuthService.IsLoggedIn)
         {
             message = "Sorry, you are not authorized to view this page.";
         }
+        //The user is not logged in
         else
         {
             NavigationManager.NavigateTo($"/login?returnUrl={returnUrl}", true);
