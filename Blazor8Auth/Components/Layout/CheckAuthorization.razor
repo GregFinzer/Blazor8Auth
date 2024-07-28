@@ -1,0 +1,24 @@
+﻿@using Blazor8Auth.Services
+
+<h1>@message</h1>
+
+@code {
+    [Inject] private AuthService AuthService { get; set; }
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    string returnUrl;
+    string message = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        returnUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+
+        if (AuthService.IsLoggedIn)
+        {
+            message = "Sorry, you are not authorized to view this page.";
+        }
+        else
+        {
+            NavigationManager.NavigateTo($"/login?returnUrl={returnUrl}", true);
+        }
+    }
+}

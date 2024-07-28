@@ -21,23 +21,7 @@
         <p>Welcome, Admin! You have access to this because you are an administrator.</p>
     </Authorized>
     <NotAuthorized>
-        <p>You do not have the necessary permissions.</p>
+        <p>You do not have the Admin Role.</p>
     </NotAuthorized>
 </AuthorizeView>
 
-@code {
-    [Inject] private AuthService AuthService { get; set; }
-    [Inject] private NavigationManager NavigationManager { get; set; }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (!AuthService.IsLoggedIn)
-        {
-            var restoredFromState = await AuthService.GetStateFromTokenAsync();
-            if (restoredFromState)
-            {
-                NavigationManager.Refresh();
-            }
-        }
-    }
-}

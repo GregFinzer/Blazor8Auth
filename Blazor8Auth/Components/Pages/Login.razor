@@ -4,6 +4,9 @@
     <h2>Blazor 8 Auth</h2>
 </div>
 
+<p>Login as admin@acme.com with any password to login with Admin role.</p>
+<p>Login as super@acme.com with any password to login with Super role.</p>
+
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Please enter your login details</h5>
@@ -21,7 +24,7 @@
                 <ValidationMessage For="@(() => loginModel.Password)" />
             </div>
             <div class="form-group">
-                <input id="showPassword" type="checkbox" checked="@showPassword "@oninput="@HandlePassword" />
+                <input id="showPassword" type="checkbox" checked="@showPassword" @oninput="@HandlePassword" />
                 <label for="showPassword">Show Password</label>
             </div>
             <h6 class="warning login-error text-center" style="display: @DisplayError">@errorMessage</h6>

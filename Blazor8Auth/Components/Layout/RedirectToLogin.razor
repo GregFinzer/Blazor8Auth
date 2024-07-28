@@ -1,9 +1,0 @@
-﻿@inject NavigationManager NavigationManager
-
-@code {
-    protected override void OnInitialized()
-    {
-        var returnUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-        NavigationManager.NavigateTo($"/login?returnUrl={returnUrl}", true);
-    }
-}

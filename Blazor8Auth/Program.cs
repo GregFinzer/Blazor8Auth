@@ -3,7 +3,6 @@ using Blazor8Auth.Services;
 using Blazored.SessionStorage;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,20 +13,18 @@ builder.Services.AddRazorComponents()
 //Authentication
 builder.Services.AddAuthorization();
 
-builder.Services.AddAuthentication();
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(options =>
-//    {
-//        options.Cookie.Name = "auth_token";
-//        options.LoginPath = "/login";
-//        options.Cookie.MaxAge = TimeSpan.FromHours(24);
-//        options.AccessDeniedPath = "/acessDenied";
-//    });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "auth_cookie";
+        options.Cookie.MaxAge = TimeSpan.FromHours(24);
+    });
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddCascadingAuthenticationState();
 
+builder.Services.AddScoped<AuthDataService>();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ICustomSessionService, CustomSessionService>();
 
